@@ -1,0 +1,9 @@
+/**
+ * function get_link_thumbnail
+ * @param  int $postID post id
+ * @param  string $type   type of image - thumbnail, medium, large, full
+ * @return string         link of image
+ */
+function get_link_thumbnail( $postID, $type = 'thumbnail') {
+    return wp_get_attachment_image_src(get_post_thumbnail_id($postID), $type);
+}
