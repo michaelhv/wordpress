@@ -1,0 +1,17 @@
+add_filter('wp_handle_upload_prefilter', 'change_title_name');
+function change_title_name($file) {
+    $file_name = '';
+//    sanitize file name
+    $file['name'] = sanitize_file_name($file['name']);
+//    Split name file and extendsion of file
+    $tmp = explode('.', $file['name']);
+    $file_ext = array_pop($tmp);
+    foreach ($tmp as $str)
+        $file_name .= $str;
+//    Sanitize string
+    $file_name = sanitize_title($file_name);
+    
+    $file['name'] = $file_name.'.'.$file_ext;
+    
+    return $file;
+}
